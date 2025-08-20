@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业信用评分系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>企业信用评分系统</h1>
+        
+        <!-- 基本信息部分 -->
+        <section class="company-info">
+            <h2>企业基本信息</h2>
+            <div class="info-group">
+                <label>公司名称：</label>
+                <input type="text" id="companyName">
+            </div>
+            <div class="info-group">
+                <label>注册资本：</label>
+                <input type="number" id="registeredCapital">
+            </div>
+            <div class="info-group">
+                <label>法人代表：</label>
+                <input type="text" id="legalPerson">
+            </div>
+            
+            <!-- 专利信息 -->
+            <div class="patent-info">
+                <label>发明专利数量：</label>
+                <input type="number" id="patentCount">
+                <button onclick="addPatentInfo()">添加专利信息</button>
+                <div id="patentList"></div>
+            </div>
+        </section>
+
+        <!-- 评分卡部分 -->
+        <section class="score-card">
+            <h2>信用评分卡</h2>
+            <div class="score-items">
+                <div class="score-item">
+                    <label>
+                        <input type="checkbox" id="policyCompliance">
+                        满足我行授信政策指引 (30分)
+                    </label>
+                </div>
+                <div class="score-item">
+                    <label>
+                        <input type="checkbox" id="creditHistory">
+                        征信近60个月无逾期 (10分)
+                    </label>
+                </div>
+                <div class="score-item">
+                    <label>
+                        <input type="checkbox" id="supplyChain">
+                        使用我行供应链结算产品 (20分)
+                    </label>
+                </div>
+                <div class="score-item">
+                    <label>
+                        <input type="checkbox" id="settlement">
+                        使用我行结算产品 (20分)
+                    </label>
+                </div>
+            </div>
+
+            <!-- 财务指标部分 -->
+            <div class="financial-info">
+                <h3>财务指标信息</h3>
+                <div class="score-item">
+                    <label>
+                        <input type="checkbox" id="hasFinancialData" onchange="toggleFinancialData()">
+                        包含Wind财务数据 (20分)
+                    </label>
+                </div>
+                <div id="financialMetrics" style="display: none;">
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <label>资产负债率：</label>
+                            <input type="number" id="debtRatio" step="0.01">
+                            <span>%</span>
+                        </div>
+                        <div class="metric-item">
+                            <label>流动比率：</label>
+                            <input type="number" id="currentRatio" step="0.01">
+                        </div>
+                        <div class="metric-item">
+                            <label>净资产收益率：</label>
+                            <input type="number" id="roe" step="0.01">
+                            <span>%</span>
+                        </div>
+                        <div class="metric-item">
+                            <label>营业收入增长率：</label>
+                            <input type="number" id="revenueGrowth" step="0.01">
+                            <span>%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风险提示 -->
+            <div class="risk-warning">
+                <label>
+                    <input type="checkbox" id="hasRisk">
+                    存在被执行人信息或破产信息
+                </label>
+            </div>
+        </section>
+
+        <button onclick="calculateScore()" class="calculate-btn">计算评分</button>
+
+        <!-- 评分结果 -->
+        <section class="result" id="resultSection" style="display: none;">
+            <h2>评分结果</h2>
+            <div id="totalScore"></div>
+            <div id="recommendation"></div>
+        </section>
+    </div>
+    <script src="script1.js"></script>
+</body>
+</html>
